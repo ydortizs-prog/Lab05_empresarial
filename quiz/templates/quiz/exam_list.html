@@ -4,7 +4,6 @@
 
 {% block content %}
 <h1>Lista de Exámenes</h1>
-<a href="{% url 'question_create' exam_id=1 %}" class="btn">Crear Pregunta</a>
 <ul>
     {% for exam in exams %}
     <li>
