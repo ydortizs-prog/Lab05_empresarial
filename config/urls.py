@@ -19,6 +19,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.site_header = 'CineQuiz'
+admin.site.site_title = 'CineQuiz Admin'
+admin.site.index_title = 'Panel de gestión'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('quiz.urls')),

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,6 +123,100 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Django Unfold admin theme (modern Tailwind UI, Inter font by default)
+UNFOLD = {
+    'SITE_TITLE': 'CineQuiz',
+    'SITE_HEADER': 'Panel de gestión',
+    'SITE_SUBHEADER': 'Panel de gestión',
+    'SITE_URL': '/',
+    'SHOW_HISTORY': True,
+    'SHOW_VIEW_ON_SITE': True,
+    'COLORS': {
+        'primary': {
+            '50': '240 249 255',
+            '100': '224 242 254',
+            '200': '186 230 253',
+            '300': '125 211 252',
+            '400': '56 189 248',
+            '500': '14 165 233',
+            '600': '2 132 199',
+            '700': '3 105 161',
+            '800': '7 89 133',
+            '900': '12 74 110',
+            '950': '8 47 73',
+        },
+    },
+    'SIDEBAR': {
+        'show_search': True,
+        'show_all_applications': True,
+        'navigation': [
+            {
+                'title': 'Catálogo',
+                'separator': True,
+                'items': [
+                    {
+                        'title': 'Películas',
+                        'icon': 'movie',
+                        'link': reverse_lazy('admin:movies_movie_changelist'),
+                    },
+                    {
+                        'title': 'Géneros',
+                        'icon': 'category',
+                        'link': reverse_lazy('admin:movies_genre_changelist'),
+                    },
+                    {
+                        'title': 'Personas',
+                        'icon': 'person',
+                        'link': reverse_lazy('admin:movies_person_changelist'),
+                    },
+                    {
+                        'title': 'Valoraciones',
+                        'icon': 'star_rate',
+                        'link': reverse_lazy('admin:movies_rating_changelist'),
+                    },
+                ],
+            },
+            {
+                'title': 'Exámenes',
+                'separator': True,
+                'items': [
+                    {
+                        'title': 'Exámenes',
+                        'icon': 'assignment',
+                        'link': reverse_lazy('admin:quiz_exam_changelist'),
+                    },
+                    {
+                        'title': 'Preguntas',
+                        'icon': 'help_center',
+                        'link': reverse_lazy('admin:quiz_question_changelist'),
+                    },
+                    {
+                        'title': 'Opciones',
+                        'icon': 'checklist',
+                        'link': reverse_lazy('admin:quiz_choice_changelist'),
+                    },
+                ],
+            },
+            {
+                'title': 'Usuarios',
+                'separator': True,
+                'items': [
+                    {
+                        'title': 'Usuarios',
+                        'icon': 'group',
+                        'link': reverse_lazy('admin:auth_user_changelist'),
+                    },
+                    {
+                        'title': 'Grupos',
+                        'icon': 'shield',
+                        'link': reverse_lazy('admin:auth_group_changelist'),
+                    },
+                ],
+            },
+        ],
+    },
+}
 
 
 # Email
